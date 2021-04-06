@@ -2,10 +2,7 @@ package ru.vafilonov;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
+import java.lang.reflect.*;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
@@ -149,7 +146,13 @@ public class signatureParser {
     static void writeMethodsInfo(PrintWriter writer, Class cl) {
         writer.println("Методы");
         writer.println("Имя" + separator + "Модификатор доступа" + separator + "Тип" + separator + "Аргументы" + separator + "Назначение");
+        Constructor[] constrs = cl.getConstructors();
         Method[] methods = cl.getDeclaredMethods();
+
+        for (var con : constrs) {
+            writer.println(cl.getSimpleName() + separator + decodeModifiers(con.getModifiers()) + separator +
+                    "конструктор" + separator + getParameters(con) + separator);
+        }
 
         for (var method : methods) {
             writer.println(method.getName() + separator + decodeModifiers(method.getModifiers()) + separator +
@@ -169,7 +172,7 @@ public class signatureParser {
         return "";
     }
 
-    static String getParameters(Method m) {
+    static String getParameters(Executable m) {
         Parameter[] params = m.getParameters();
         if (params.length == 0)
             return "-";
