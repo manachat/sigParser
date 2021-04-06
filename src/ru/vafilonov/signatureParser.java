@@ -15,6 +15,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+/**
+ * Program for parsing .class files
+ *
+ * @author Vsevolod Filonov
+ */
 public class signatureParser {
 
     static String usage = "Usage: java signatureParser <flags> dir_name";

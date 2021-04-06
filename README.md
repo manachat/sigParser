@@ -4,7 +4,7 @@ Parses classfiles into csv tabels of fields and methods signatures
 
 
 ## Usage
-java [path_to_class_file]/sigParser <flags> classpath  
+java -cp [path_to_bin] ru.vafilonov.signatureParser <flags> classpath  
 
 flags:  
   -o <outdir> - directory to save csv files  
